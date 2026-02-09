@@ -6,10 +6,6 @@ public class WeightProduct extends Product {
     public WeightProduct(String name, String description) {
         super(name, description);
     }
-    @Override
-    public double getWeight() {
-        return 0;
-    }
 
     @Override
     public boolean equals(Object o) {

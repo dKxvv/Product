@@ -2,66 +2,62 @@ package org.example;
 
 import java.util.Objects;
 
-public class PackagedWeightProduct {
-        private final Packaging packaging;
-        private final WeightProduct product;
-        private final double productWeight; // вес товара в кг
+public class PackagedWeightProduct extends WeightProduct {
+    private final double productWeight;
+    private final Packaging packaging;
 
-        public PackagedWeightProduct(WeightProduct product, double productWeight, Packaging packaging) {
-            if (product == null) {
-                throw new IllegalArgumentException("Товар не может быть пустым");
-            }
-            if (packaging == null) {
-                throw new IllegalArgumentException("Упаковка не может быть пустым");
-            }
-            if (productWeight <= 0) {
-                throw new IllegalArgumentException("Вес товара должен быть положительным");
-            }
-            this.product = product;
-            this.productWeight = productWeight;
-            this.packaging = packaging;
+    public PackagedWeightProduct(String name, String description, double productWeight, Packaging packaging) {
+        super(name, description);
+
+        if (productWeight <= 0) {
+            throw new IllegalArgumentException("Вес товара должен быть положительным");
+        }
+        if (packaging == null) {
+            throw new IllegalArgumentException("Упаковка не может быть null");
         }
 
-        public Packaging getPackaging() {
-            return packaging;
-        }
+        this.productWeight = productWeight;
+        this.packaging = packaging;
+    }
 
-        public WeightProduct getProduct() {
-            return product;
-        }
+    public double getProductWeight() {
+        return productWeight;
+    }
 
-        public double getProductWeight() {
-            return productWeight;
-        }
+    public Packaging getPackaging() {
+        return packaging;
+    }
 
-        // Масса нетто (только товара)
-        public double getNetWeight() {
-            return productWeight;
-        }
+    public double getNetWeight() {
+        return productWeight;
+    }
 
-        // Масса брутто (товара + упаковки)
-        public double getGrossWeight() {
-            return productWeight + packaging.getWeight();
-        }
+    public double getGrossWeight() {
+        return productWeight + packaging.getWeight();
+    }
 
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            PackagedWeightProduct that = (PackagedWeightProduct) o;
-            return Double.compare(that.productWeight, productWeight) == 0 &&
-                    packaging.equals(that.packaging) &&
-                    product.equals(that.product);
-        }
+    @Override
+    public double getWeight() {
+        return productWeight;
+    }
 
-        @Override
-        public int hashCode() {
-            return Objects.hash(packaging, product, productWeight);
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PackagedWeightProduct that)) return false;
+        if (!super.equals(that)) return false;
+        return Double.compare(that.productWeight, productWeight) == 0 &&
+                Objects.equals(packaging, that.packaging);
+    }
 
-        @Override
-        public String toString() {
-            return String.format("Упакованный весовой товар{товар=%s, вес товара=%.3f кг, %s}",
-                    product, productWeight, packaging);
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), productWeight, packaging);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Упакованный весовой товар{название='%s', описание='%s', вес товара=%.3f кг, %s}",
+                getName(), getDescription(), productWeight, packaging);
+    }
 }

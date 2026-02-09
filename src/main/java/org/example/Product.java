@@ -1,21 +1,19 @@
 package org.example;
 
 import java.util.Objects;
-public abstract class Product {
+
+public class Product {
     private final String name;
     private final String description;
 
-        protected Product(String name, String description) {
-            if (name == null || name.trim().isEmpty()) {
-                throw new IllegalArgumentException("Название товара не может быть пустым");
-            }
-            this.name = name.trim();
-            if (description != null) {
-                this.description = description.trim();
-            } else {
-                this.description = "";
-            }
+    public Product(String name, String description) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Название товара не может быть пустым");
         }
+        this.name = name.trim();
+        this.description = (description != null) ? description.trim() : "";
+    }
+
     public String getName() {
         return name;
     }
@@ -24,7 +22,11 @@ public abstract class Product {
         return description;
     }
 
-    public abstract double getWeight();
+    // Базовая реализация: обычный товар без веса → вес = 0
+    public double getWeight() {
+        return 0.0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
