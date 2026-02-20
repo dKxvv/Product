@@ -26,7 +26,6 @@ public class PackagedPieceProductTest {
         // Проверяем собственные поля
         assertEquals(packaging, packagedProduct.getPackaging());
         assertEquals(quantity, packagedProduct.getQuantity());
-        assertEquals(quantity, packagedProduct.getPieceCount());
     }
 
     @Test

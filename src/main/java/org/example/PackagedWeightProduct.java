@@ -2,9 +2,9 @@ package org.example;
 
 import java.util.Objects;
 
-public class PackagedWeightProduct extends WeightProduct {
-    private final double productWeight;
-    private final Packaging packaging;
+public class PackagedWeightProduct extends WeightProduct implements PackagedItem { // ← ДОБАВЛЕНО
+    private final double productWeight; // масса товара (нетто) в кг
+    private final Packaging packaging;  // упаковка
 
     public PackagedWeightProduct(String name, String description, double productWeight, Packaging packaging) {
         super(name, description);
@@ -20,18 +20,12 @@ public class PackagedWeightProduct extends WeightProduct {
         this.packaging = packaging;
     }
 
-    public double getProductWeight() {
-        return productWeight;
-    }
 
     public Packaging getPackaging() {
         return packaging;
     }
 
-    public double getNetWeight() {
-        return productWeight;
-    }
-
+    @Override
     public double getGrossWeight() {
         return productWeight + packaging.getWeight();
     }

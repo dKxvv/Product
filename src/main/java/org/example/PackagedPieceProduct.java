@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.Objects;
 
-public class PackagedPieceProduct extends PieceProduct {
+public class PackagedPieceProduct extends PieceProduct implements PackagedItem {
     private final int quantity;
     private final Packaging packaging;
 
@@ -20,7 +20,7 @@ public class PackagedPieceProduct extends PieceProduct {
         this.packaging = packaging;
     }
 
-    public int getQuantity() {
+    public int getQuantity() { // Количество штук
         return quantity;
     }
 
@@ -28,16 +28,13 @@ public class PackagedPieceProduct extends PieceProduct {
         return packaging;
     }
 
-    public int getPieceCount() {
-        return quantity;
-    }
 
-
-    public double getNetWeight() {
+    public double getNetWeight() { //Масса нетто
         return getPieceWeight() * quantity;
     }
 
-    public double getGrossWeight() {
+    @Override
+    public double getGrossWeight() { //Масса брутто
         return getNetWeight() + packaging.getWeight();
     }
 

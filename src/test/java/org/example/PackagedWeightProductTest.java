@@ -21,7 +21,6 @@ public class PackagedWeightProductTest {
         assertEquals(name, packagedProduct.getName());
         assertEquals(description, packagedProduct.getDescription());
         assertEquals(packaging, packagedProduct.getPackaging());
-        assertEquals(productWeight, packagedProduct.getProductWeight(), 0.001);
         assertEquals(productWeight, packagedProduct.getWeight(), 0.001); // getWeight() должен возвращать вес товара
     }
 
@@ -48,9 +47,9 @@ public class PackagedWeightProductTest {
                 "Сахар", "Рафинированный сахар", 10.0, new Packaging("Мешок", 0.2)
         );
 
-        assertEquals(10.0, packagedProduct.getNetWeight(), 0.001);
+        assertEquals(10.0, packagedProduct.getWeight(), 0.001);
         assertEquals(10.2, packagedProduct.getGrossWeight(), 0.001);
-        assertEquals(10.0, packagedProduct.getWeight(), 0.001); // getWeight() = нетто-вес
+
     }
 
     @Test
