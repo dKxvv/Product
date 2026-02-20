@@ -5,4 +5,4 @@
 ## 🛠 Стек
 - Java
 - Maven
-- Spring Framework (в разработке)
+- Spring Framework
